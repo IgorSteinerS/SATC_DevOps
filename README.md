@@ -19,3 +19,19 @@ Um SRE define que uma aplicação tem um SLO (Objetivo de Nível de Serviço) de
 * **Definição:** DevOps é a filosofia e a cultura (o "o quê"). SRE é uma forma específica e prescritiva de implementar DevOps utilizando práticas de engenharia de software (o "como").
 * **Foco Operacional:** DevOps foca em velocidade de entrega e automação de processos. SRE foca em garantir a disponibilidade do sistema e gerenciar o risco operacional.
 * **Métricas:** DevOps utiliza métricas voltadas ao ciclo de desenvolvimento, como frequência de deploy e tempo de recuperação (MTTR). SRE baseia-se em métricas de confiabilidade, como SLI (Indicadores), SLO (Objetivos), SLA (Acordos) e Error Budgets.
+
+
+# Analisador Rápido de Textos
+
+Este projeto consiste em uma aplicação web desenvolvida em Python utilizando o framework Streamlit. O objetivo principal do sistema é processar blocos de texto fornecidos pelo usuário e retornar métricas analíticas e estatísticas de forma instantânea.
+
+## Funcionalidades
+
+A aplicação realiza as seguintes operações no texto inserido:
+
+* **Contagem de Caracteres e Palavras:** Calcula o volume total de caracteres (com e sem espaços) e o número total de palavras.
+* **Estimativa de Tempo de Leitura:** Retorna o tempo médio estimado necessário para a leitura completa do texto, baseado em uma velocidade média de leitura.
+* **Análise de Frequência de Termos:** Processa o texto para identificar as palavras mais utilizadas.
+* **Visualização de Dados:** Gera um gráfico de barras nativo ilustrando a frequência das 5 palavras mais repetidas.
+
+  
