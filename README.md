@@ -35,3 +35,4 @@ A aplicação realiza as seguintes operações no texto inserido:
 * **Visualização de Dados:** Gera um gráfico de barras nativo ilustrando a frequência das 5 palavras mais repetidas.
 
   
+
