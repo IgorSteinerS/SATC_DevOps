@@ -5,44 +5,74 @@ import re
 
 
 st.set_page_config(
-    page_title="Analisador Rápido de Textos",
+    page_title="Analisador Rápido de texts",
     layout="centered"
 )
 
 
-def calcular_metricas_basicas(texto):
-    """
-    Deve retornar o número de caracteres (com e sem espaços),
-    número de palavras e tempo estimado de leitura.
-    """
-    pass
+def calculate_basic_metrics(text):
+    chars_with_space = len(text)
+    chars_without_space = len(text.replace(" ", ""))
+    words = len(text.split())
+    average_words_per_minute = 200
+    reading_time = max(1, round(words / average_words_per_minute))
 
-def extrair_palavras_frequentes(texto, quantidade=5):
-    """
-    Deve limpar o texto, contar as palavras e retornar
-    um DataFrame do Pandas com as 'n' mais frequentes.
-    """
-    pass
+    return {
+        "Caracteres (com espaços)": chars_with_space,
+        "Caracteres (sem espaços)": chars_without_space,
+        "Palavras": words,
+        "Tempo de leitura (min)": reading_time,
+    }
 
-# Interface do Usuário (UI)
-def main():
-    st.title("Analisador Rápido de Textos")
-    st.write("Insira um bloco de texto abaixo para extrair métricas instantâneas.")
+
+def extract_frequent_words(text, quantity=5):
+    
+    clean_text = re.sub(r"[^\w\s]", "", text.lower())
+    words = clean_text.split()
 
     
-    texto_entrada = st.text_area(
-        label="Texto para análise",
-        placeholder="Cole seu texto aqui...",
+    stopwords = {"de", "a", "o", "que", "e", "do", "da", "em", "um", "para",
+                 "com", "uma", "os", "no", "se", "na", "por", "mais", "as",
+                 "dos", "como", "mas", "ao", "ele", "das", "à", "seu", "sua",
+                 "ou", "when", "the", "is", "in", "it", "of", "and", "to",
+                 "a", "that", "was", "for", "on", "are", "with", "as", "at"}
+
+    filtered_words = [p for p in words if p not in stopwords and len(p) > 2]
+
+    contagem = Counter(filtered_words)
+    most_comons = contagem.most_common(quantity)
+
+    df = pd.DataFrame(most_comons, columns=["Palavra", "Frequência"])
+    df.index += 1
+    return df
+
+
+# User interface
+def main():
+    st.title("Analisador Rápido de texts")
+    st.write("Insira um bloco de text abaixo para extrair métricas instantâneas.")
+
+    input_text = st.text_area(
+        label="text para análise",
+        placeholder="Cole seu text aqui...",
         height=250
     )
 
-    
-    if st.button("Analisar Texto"):
-        if texto_entrada.strip():
-            
-            st.info("Processamento será implementado aqui.")
+    if st.button("Analisar text"):
+        if input_text.strip():
+            metrics = calculate_basic_metrics(input_text)
+            dataframe_frequents = extract_frequent_words(input_text)
+
+            st.subheader("Métricas Gerais")
+            cols = st.columns(4)
+            for col, (label, valor) in zip(cols, metrics.items()):
+                col.metric(label=label, value=valor)
+
+            st.subheader("Palavras Mais Frequentes")
+            st.dataframe(dataframe_frequents, use_container_width=True)
         else:
-            st.warning("Por favor, insira algum texto antes de analisar.")
+            st.warning("Por favor, insira algum text antes de analisar.")
+
 
 if __name__ == "__main__":
     main()
