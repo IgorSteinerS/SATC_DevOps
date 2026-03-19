@@ -47,7 +47,7 @@ def extract_frequent_words(text, quantity=5):
     return df
 
 
-# User interface
+# User interface with Streamlit
 def main():
     st.title("Analisador Rápido de texts")
     st.write("Insira um bloco de text abaixo para extrair métricas instantâneas.")
