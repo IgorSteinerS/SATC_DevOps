@@ -36,3 +36,4 @@ A aplicação realiza as seguintes operações no texto inserido:
 
   
 
+
